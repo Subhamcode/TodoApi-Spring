@@ -1,9 +1,7 @@
 package com.RestApiDemo.TodoApi;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,5 +27,14 @@ public class TodoController {
     public Todo createTodo(@RequestBody Todo newTodo){
             todolist.add(newTodo);
             return newTodo;
+    }
+    @GetMapping("/todos/{todoid}")
+    public ResponseEntity<Todo> getTodoById(@PathVariable int todoid){
+        for(Todo t:todolist){
+            if(t.getId()==todoid){
+                return ResponseEntity.ok(t);
+            }
+        }
+        return ResponseEntity.notFound().build();
     }
 }
