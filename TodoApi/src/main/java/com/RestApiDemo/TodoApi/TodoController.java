@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
+@RequestMapping("/api/v1/todos")
 public class TodoController {
 
     private static List<Todo> todolist;
@@ -18,17 +19,17 @@ public class TodoController {
         todolist.add(new Todo(2,"Todo 2",2,true));
     }
 
-    @GetMapping("/todos")
+    @GetMapping
     public List<Todo> getTodos(){
         return todolist;
     }
 
-    @PostMapping("/createTodo")
+    @PostMapping
     public Todo createTodo(@RequestBody Todo newTodo){
             todolist.add(newTodo);
             return newTodo;
     }
-    @GetMapping("/todos/{todoid}")
+    @GetMapping("/{todoid}")
     public ResponseEntity<Todo> getTodoById(@PathVariable int todoid){
         for(Todo t:todolist){
             if(t.getId()==todoid){
