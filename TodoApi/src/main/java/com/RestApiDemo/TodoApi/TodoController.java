@@ -12,15 +12,17 @@ public class TodoController {
 
     private static List<Todo> todolist;
 
-
-    public TodoController(){
+    private TodoService todoservice;
+    public TodoController(TodoService todoservice){
+        this.todoservice=todoservice;
         todolist=new ArrayList<>();
         todolist.add(new Todo(1,"Todo 1",1,false));
         todolist.add(new Todo(2,"Todo 2",2,true));
     }
 
     @GetMapping
-    public List<Todo> getTodos(){
+    public List<Todo> getTodos(@RequestParam(required = false) boolean isCompleted){
+        System.out.println("todo status is "+isCompleted +" "+todoservice.doSomething());
         return todolist;
     }
 
