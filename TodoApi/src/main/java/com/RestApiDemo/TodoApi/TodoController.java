@@ -13,7 +13,7 @@ public class TodoController {
     private static List<Todo> todolist;
 
     private TodoService todoservice;
-    public TodoController(TodoService todoservice){
+    public TodoController(TodoService todoservice){ //constructor dependency injection
         this.todoservice=todoservice;
         todolist=new ArrayList<>();
         todolist.add(new Todo(1,"Todo 1",1,false));
